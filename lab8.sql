@@ -3,6 +3,7 @@ select * from customers;
 select * from orders;
 --3
 revoke all privileges on five from junior_dev;
+revoke all privileges on six from junior_dev;
 reassign owned by junior_dev to postgres;
 drop role if exists junior_dev;
 create role junior_dev login;
