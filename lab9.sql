@@ -95,7 +95,8 @@ $$
 language plpgsql;
 select * from update_salary('John',45,30);
 --7
-create or replace function complex_calculation(index integer,string varchar) returns varchar as
+drop function complex_calculation;
+create or replace function complex_calculation(index_left integer,index_right integer,string varchar) returns varchar as
 $$
 <<complex>>
 declare
@@ -104,15 +105,15 @@ begin
 	
 	<<from_left>>
 	begin
-		complex.answer = complex.answer || left(string,index);
+		complex.answer = complex.answer || left(string,index_left);
 	end from_left;
 	<<from_right>>
 	begin
-		complex.answer = complex.answer || right(string,index);
+		complex.answer = complex.answer || right(string,index_right);
 	end from_right;
 	
 	return reverse(answer);
 end complex;
 $$
 language plpgsql;
-select * from complex_calculation(2,'example text');
+select * from complex_calculation(2,3,'example text');
